@@ -1,0 +1,81 @@
+The lab -- two fake homes, one invented person
+====================================================================
+
+The lab is two directories pretending to be two machines.
+Build it with the script next to this note:
+
+    sh build-lab.sh lab
+
+    lab/home-laptop/   a stand-in home directory for Alex's
+                       laptop, with specimen dotfiles inside
+    lab/home-server/   a stand-in home directory for Alex's
+                       small home server, empty
+
+Alex Mercer is invented. The email addresses are example
+addresses, the token in the secrets chapter is an invented
+string whose only job is to be found again later, and no name,
+machine, or organisation in the lab is anybody's real one.
+
+THE SAFETY RULE, WITHOUT WHICH NOTHING ELSE HERE IS SAFE
+--------------------------------------------------------------------
+Every chezmoi command in the guide is run with HOME set to one
+of the two fake homes -- never to a real home directory:
+
+    export HOME=$PWD/lab/home-laptop     # or home-server
+
+That one variable is what makes the lab a lab. chezmoi believes
+$HOME completely: init puts the source directory under it,
+apply writes into it, remove would delete from it. Pointed at a
+real home, the same commands would manage -- and could damage --
+real configuration. The build of this guide ran every command
+that way, against the fakes, and no command was ever run
+against the build machine's real home. If you follow along,
+keep the rule: check `chezmoi source-path` names a path inside
+your lab before you apply anything.
+
+The specimens
+--------------------------------------------------------------------
+home-laptop/ starts with four files:
+
+    .bashrc      aliases, a history size, a prompt -- the file
+                 every chapter keeps changing on purpose
+    .gitconfig   a name, an email, an editor: the two values
+                 that later become template data are email
+                 and editor
+    .vimrc       six lines of vim settings; the file the
+                 recovery recipe deletes on the server
+    todo.txt     a scratch note. Not configuration at all,
+                 which is exactly its role in chapter 8
+
+Everything else in the homes was put there by chezmoi itself
+(.local/share/chezmoi, .config/chezmoi) or by the chapters
+(.tmux.conf, .vault_token, .setup-stamp).
+
+What the chapters do, in order
+--------------------------------------------------------------------
+The laptop is set up first: init, add, first commit (ch. 2).
+The server clones the laptop's repository and applies (ch. 4).
+Edits then travel in both directions (ch. 5). The .gitconfig
+and .bashrc become templates and the two homes start rendering
+differently from the same repository (ch. 6). todo.txt is put
+in the repository and ignored in the same breath (ch. 8). A
+run_once_ script runs once per machine (ch. 9). A token file
+is encrypted with age, fails to open on the server, and opens
+once the server holds the key (ch. 10). The repository's final
+history has thirteen commits; the guide's transcripts quote
+from all of it.
+
+Two honest lab artefacts
+--------------------------------------------------------------------
+Both fake homes sit on one physical machine, so both report
+the same real hostname to chezmoi (visible in chapter 7's
+`chezmoi data` capture). That is why the guide drives its
+per-machine differences from explicit data (machine = laptop /
+server) instead of .chezmoi.hostname: on two real machines
+the hostname differs by itself, and the same templates would
+work unchanged against it.
+
+And the "remote" the server clones is a path on the same disk:
+the laptop's source directory. Real setups clone a hosted
+repository. The commands are identical; only the argument to
+`chezmoi init` differs, and chapter 4 says so where it matters.

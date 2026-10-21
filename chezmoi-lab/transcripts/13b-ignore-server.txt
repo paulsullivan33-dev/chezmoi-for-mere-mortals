@@ -1,0 +1,30 @@
+# The server pulls the ignore file and the todo.txt commit.
+# Its clone of the repository contains todo.txt -- and its
+# home still has none, because the ignore travels with the repo
+
+$ chezmoi update
+From /home/hatch/workspace/chezmoi-build/lab/home-laptop/.local/share/chezmoi
+   16de004..b272741  main       -> origin/main
+Updating 16de004..b272741
+Fast-forward
+ todo.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+ create mode 100644 todo.txt
+[exit 0]
+
+$ ls .local/share/chezmoi
+dot_bashrc.tmpl
+dot_gitconfig.tmpl
+dot_vimrc
+todo.txt
+[exit 0]
+
+$ ls /home/hatch/workspace/chezmoi-build/lab/home-server/todo.txt
+ls: cannot access '/home/hatch/workspace/chezmoi-build/lab/home-server/todo.txt': No such file or directory
+[exit 2]
+
+$ chezmoi managed
+.bashrc
+.gitconfig
+.vimrc
+[exit 0]

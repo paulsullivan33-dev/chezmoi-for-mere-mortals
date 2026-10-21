@@ -1,0 +1,45 @@
+# chezmoi git -- runs git inside the source directory.
+# First: an identity for this repository only (Alex is invented;
+# the address is an example address)
+
+$ chezmoi git -- config user.name Alex Mercer
+[exit 0]
+
+$ chezmoi git -- config user.email alex@example.com
+[exit 0]
+
+$ chezmoi git -- add dot_bashrc dot_gitconfig dot_vimrc
+[exit 0]
+
+$ chezmoi git -- status
+On branch main
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+	new file:   dot_bashrc
+	new file:   dot_gitconfig
+	new file:   dot_vimrc
+
+[exit 0]
+
+$ chezmoi git -- commit -m Alex's dotfiles, first state
+[main (root-commit) 285d9f8] Alex's dotfiles, first state
+ 3 files changed, 28 insertions(+)
+ create mode 100644 dot_bashrc
+ create mode 100644 dot_gitconfig
+ create mode 100644 dot_vimrc
+[exit 0]
+
+$ chezmoi git -- branch -M main
+[exit 0]
+
+$ chezmoi git -- log --oneline
+285d9f8 Alex's dotfiles, first state
+[exit 0]
+
+$ chezmoi git -- status
+On branch main
+nothing to commit, working tree clean
+[exit 0]

@@ -1,0 +1,8 @@
+# One age key for the lab, kept OUTSIDE both homes and outside
+# the repository. age-keygen prints the public half (the
+# recipient) -- that half is safe to show. The key file itself
+# is never printed in this guide, and never committed.
+
+$ age-keygen -o /home/hatch/workspace/chezmoi-build/lab-age-key.txt
+Public key: age14lyekj4m7gtzxmnt47umyltjvgvgvcgvv2rpnjhutntlcu89hu6qpazjh9
+[exit 0]

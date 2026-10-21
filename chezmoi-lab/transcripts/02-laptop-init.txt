@@ -1,0 +1,36 @@
+# The laptop stand-in home, before chezmoi does anything:
+# Alex's specimen dotfiles, nothing else
+
+$ ls -la
+total 16
+drwxrws--- 1 root nogroup  62 Oct 21 22:01 .
+drwxrws--- 1 root nogroup  44 Oct 21 22:01 ..
+-rw-rw---- 1 root nogroup 283 Oct 21 22:01 .bashrc
+-rw-rw---- 1 root nogroup 139 Oct 21 22:01 .gitconfig
+-rw-rw---- 1 root nogroup 105 Oct 21 22:01 .vimrc
+-rw-rw---- 1 root nogroup  81 Oct 21 22:01 todo.txt
+[exit 0]
+
+# init with no repository argument
+
+$ chezmoi init
+[exit 0]
+
+# What init actually made: the source directory, already a git
+# repository (chezmoi runs git init in it). No config file:
+# chezmoi works from defaults until there is something to say.
+
+$ find .local -maxdepth 3
+.local
+.local/share
+.local/share/chezmoi
+.local/share/chezmoi/.git
+[exit 0]
+
+$ ls .config
+ls: cannot access '.config': No such file or directory
+[exit 2]
+
+$ chezmoi source-path
+/home/hatch/workspace/chezmoi-build/lab/home-laptop/.local/share/chezmoi
+[exit 0]

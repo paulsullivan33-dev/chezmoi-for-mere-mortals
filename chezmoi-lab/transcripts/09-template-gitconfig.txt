@@ -1,0 +1,69 @@
+# Previously: .gitconfig was re-added with --template, so the
+# source file is dot_gitconfig.tmpl, committed as a rename.
+# Now Alex edits the template so two answers come from data
+# instead of being baked in. The edited template:
+
+$ cat .local/share/chezmoi/dot_gitconfig.tmpl
+[user]
+	name = Alex Mercer
+	email = {{ .email }}
+[core]
+	editor = {{ .editor }}
+[init]
+	defaultBranch = main
+[alias]
+	st = status
+	co = checkout
+[exit 0]
+
+# The data itself lives in the config file, which is
+# per-machine and never enters the repository
+# (this one is kept as examples/chezmoi.toml.laptop)
+
+$ cat .config/chezmoi/chezmoi.toml
+# Alex's config on the laptop: ~/.config/chezmoi/chezmoi.toml
+# This file is NOT in the dotfiles repository. It is written on
+# each machine, by hand, and it is how one shared set of templates
+# renders differently per machine: templates read these values.
+
+[data]
+    machine = "laptop"
+    email = "alex@example.com"
+    editor = "vim"
+[exit 0]
+
+# Apply on the laptop: the template renders with the laptop's
+# answers, which match what was already there -- no change
+
+$ chezmoi apply
+[exit 0]
+
+$ cat /home/hatch/workspace/chezmoi-build/lab/home-laptop/.gitconfig
+[user]
+	name = Alex Mercer
+	email = alex@example.com
+[core]
+	editor = vim
+[init]
+	defaultBranch = main
+[alias]
+	st = status
+	co = checkout
+[exit 0]
+
+$ chezmoi git -- add dot_gitconfig.tmpl
+[exit 0]
+
+$ chezmoi git -- commit -m Gitconfig template reads email and editor from data
+[main a1540fd] Gitconfig template reads email and editor from data
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+[exit 0]
+
+$ chezmoi git -- log --oneline
+a1540fd Gitconfig template reads email and editor from data
+55df297 Gitconfig becomes a template (email, editor)
+b873dee Bash history: 5000 lines
+9d34b5f Vim: note appended through chezmoi edit
+2f40606 Add gd alias (re-added from the laptop)
+285d9f8 Alex's dotfiles, first state
+[exit 0]

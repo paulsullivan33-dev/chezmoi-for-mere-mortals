@@ -1,0 +1,64 @@
+# A new kind of source entry: a script. Its name begins
+# run_once_, so chezmoi runs it instead of copying it --
+# once per machine, until its contents change.
+# (The script is examples/run_once_10-stamp.sh.)
+
+$ ls .local/share/chezmoi
+dot_bashrc.tmpl
+dot_gitconfig.tmpl
+dot_vimrc
+run_once_10-stamp.sh
+todo.txt
+[exit 0]
+
+$ chezmoi status
+ R 10-stamp.sh
+[exit 0]
+
+$ chezmoi apply --verbose
+diff --git a/10-stamp.sh b/10-stamp.sh
+new file mode 100755
+index 0000000000000000000000000000000000000000..12f5e77210f34b87866a9c6b5d3e5543038b8a2d
+--- /dev/null
++++ b/10-stamp.sh
+@@ -0,0 +1,15 @@
++#!/bin/sh
++# run_once_10-stamp.sh -- a specimen first-run script.
++#
++# A file in the source state whose name begins run_once_ is not
++# copied anywhere: chezmoi RUNS it, once, on each machine. It
++# remembers the run (a hash of the contents, in chezmoi's own
++# state), so the script runs again only when its contents change.
++# The number is just part of the name -- scripts run in name
++# order, and 10 leaves room at both ends.
++#
++# This one leaves evidence you can count: one line in
++# ~/.setup-stamp per actual run, plus a line said out loud.
++
++echo "run_once_10-stamp: first-run setup ran on this machine"
++echo "setup ran" >> "$HOME/.setup-stamp"
+run_once_10-stamp: first-run setup ran on this machine
+[exit 0]
+
+$ cat /home/hatch/workspace/chezmoi-build/lab/home-laptop/.setup-stamp
+setup ran
+[exit 0]
+
+# Apply again: the stamp does not grow. The script's contents
+# are unchanged, and chezmoi remembers running them.
+
+$ chezmoi apply
+[exit 0]
+
+$ wc -l /home/hatch/workspace/chezmoi-build/lab/home-laptop/.setup-stamp
+1 /home/hatch/workspace/chezmoi-build/lab/home-laptop/.setup-stamp
+[exit 0]
+
+$ chezmoi git -- add run_once_10-stamp.sh
+[exit 0]
+
+$ chezmoi git -- commit -m Add a run_once_ first-run script
+[main adc064a] Add a run_once_ first-run script
+ 1 file changed, 15 insertions(+)
+ create mode 100755 run_once_10-stamp.sh
+[exit 0]

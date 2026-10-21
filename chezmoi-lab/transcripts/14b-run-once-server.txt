@@ -1,0 +1,24 @@
+# The server's first update with the script in the repo:
+# the script runs here too -- once. A second apply is quiet.
+
+$ chezmoi update
+From /home/hatch/workspace/chezmoi-build/lab/home-laptop/.local/share/chezmoi
+   b272741..adc064a  main       -> origin/main
+Updating b272741..adc064a
+Fast-forward
+ run_once_10-stamp.sh | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100755 run_once_10-stamp.sh
+run_once_10-stamp: first-run setup ran on this machine
+[exit 0]
+
+$ wc -l /home/hatch/workspace/chezmoi-build/lab/home-server/.setup-stamp
+1 /home/hatch/workspace/chezmoi-build/lab/home-server/.setup-stamp
+[exit 0]
+
+$ chezmoi apply
+[exit 0]
+
+$ wc -l /home/hatch/workspace/chezmoi-build/lab/home-server/.setup-stamp
+1 /home/hatch/workspace/chezmoi-build/lab/home-server/.setup-stamp
+[exit 0]

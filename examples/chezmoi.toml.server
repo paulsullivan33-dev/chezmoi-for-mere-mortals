@@ -1,0 +1,16 @@
+# Alex's config on the server: ~/.config/chezmoi/chezmoi.toml
+# Same shape as the laptop's, different answers. The repository
+# never sees either file; each machine keeps its own.
+# The encryption line and the [age] identity arrive in the
+# secrets chapter: the server only ever decrypts, so it needs
+# the key but no recipient.
+
+encryption = "age"
+
+[data]
+    machine = "server"
+    email = "alex@homelab.example"
+    editor = "nano"
+
+[age]
+    identity = "/path/to/alex-age-key.txt"

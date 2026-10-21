@@ -1,0 +1,25 @@
+# A pattern, not just a name: with '*.tmp' temporarily added
+# to .chezmoiignore, a scratch file cannot be added either.
+# (Temporary edit for this capture; the file is restored
+# afterwards and the change is never committed.)
+
+$ sh -c printf 'draft.tmp contents\n' > ~/draft.tmp
+[exit 0]
+
+$ sh -c printf 'todo.txt\n*.tmp\n' > .local/share/chezmoi/.chezmoiignore
+[exit 0]
+
+$ chezmoi add /home/hatch/workspace/chezmoi-build/lab/home-laptop/draft.tmp
+chezmoi: warning: ignoring draft.tmp
+[exit 0]
+
+$ sh -c printf 'todo.txt\n' > .local/share/chezmoi/.chezmoiignore
+[exit 0]
+
+$ rm /home/hatch/workspace/chezmoi-build/lab/home-laptop/draft.tmp
+[exit 0]
+
+$ chezmoi git -- status
+On branch main
+nothing to commit, working tree clean
+[exit 0]

@@ -1,0 +1,214 @@
+# The server stand-in home: completely empty
+
+$ ls -la
+total 0
+drwxrws--- 1 root nogroup  0 Oct 21 22:01 .
+drwxrws--- 1 root nogroup 44 Oct 21 22:01 ..
+[exit 0]
+
+# init with the laptop's source directory as the repository.
+# A real setup would name a git host or a URL; a local path is
+# cloned exactly the same way, and the lab has no network.
+
+$ chezmoi init /home/hatch/workspace/chezmoi-build/lab/home-laptop/.local/share/chezmoi
+Cloning into '/home/hatch/workspace/chezmoi-build/lab/home-server/.local/share/chezmoi'...
+done.
+[exit 0]
+
+$ ls .local/share/chezmoi
+dot_bashrc
+dot_gitconfig
+dot_vimrc
+[exit 0]
+
+# Before anything is written: status says every managed file
+# is missing here (A = would be added), diff shows the content
+
+$ chezmoi status
+ A .bashrc
+ A .gitconfig
+ A .vimrc
+[exit 0]
+
+$ chezmoi diff
+diff --git a/.bashrc b/.bashrc
+new file mode 100660
+index 0000000000000000000000000000000000000000..77f7bf9a950667e85c58d658263bfd90b747c565
+--- /dev/null
++++ b/.bashrc
+@@ -0,0 +1,12 @@
++# Alex's .bashrc -- the shared starting point on every machine.
++
++# History: kept, and shared sensibly between shells.
++HISTSIZE=1000
++HISTFILESIZE=2000
++
++# Prompt: user@host and the working directory.
++PS1='\u@\h:\w\$ '
++
++# Aliases everyone gets.
++alias ll='ls -alF'
++alias gs='git status'
+diff --git a/.gitconfig b/.gitconfig
+new file mode 100660
+index 0000000000000000000000000000000000000000..9770bb4a066e00e1eb51199a90e4946ec2f9a7ff
+--- /dev/null
++++ b/.gitconfig
+@@ -0,0 +1,10 @@
++[user]
++	name = Alex Mercer
++	email = alex@example.com
++[core]
++	editor = vim
++[init]
++	defaultBranch = main
++[alias]
++	st = status
++	co = checkout
+diff --git a/.vimrc b/.vimrc
+new file mode 100660
+index 0000000000000000000000000000000000000000..4a81ef35179152b813f219fc9fcfb6419abb862d
+--- /dev/null
++++ b/.vimrc
+@@ -0,0 +1,6 @@
++" Alex's .vimrc -- small and portable.
++set number
++set expandtab
++set tabstop=4
++set shiftwidth=4
++syntax on
+[exit 0]
+
+# The full rehearsal: dry-run changes nothing, verbose names it
+
+$ chezmoi apply --dry-run --verbose
+diff --git a/.bashrc b/.bashrc
+new file mode 100660
+index 0000000000000000000000000000000000000000..77f7bf9a950667e85c58d658263bfd90b747c565
+--- /dev/null
++++ b/.bashrc
+@@ -0,0 +1,12 @@
++# Alex's .bashrc -- the shared starting point on every machine.
++
++# History: kept, and shared sensibly between shells.
++HISTSIZE=1000
++HISTFILESIZE=2000
++
++# Prompt: user@host and the working directory.
++PS1='\u@\h:\w\$ '
++
++# Aliases everyone gets.
++alias ll='ls -alF'
++alias gs='git status'
+diff --git a/.gitconfig b/.gitconfig
+new file mode 100660
+index 0000000000000000000000000000000000000000..9770bb4a066e00e1eb51199a90e4946ec2f9a7ff
+--- /dev/null
++++ b/.gitconfig
+@@ -0,0 +1,10 @@
++[user]
++	name = Alex Mercer
++	email = alex@example.com
++[core]
++	editor = vim
++[init]
++	defaultBranch = main
++[alias]
++	st = status
++	co = checkout
+diff --git a/.vimrc b/.vimrc
+new file mode 100660
+index 0000000000000000000000000000000000000000..4a81ef35179152b813f219fc9fcfb6419abb862d
+--- /dev/null
++++ b/.vimrc
+@@ -0,0 +1,6 @@
++" Alex's .vimrc -- small and portable.
++set number
++set expandtab
++set tabstop=4
++set shiftwidth=4
++syntax on
+[exit 0]
+
+$ ls -la
+total 0
+drwxrws--- 1 root nogroup 12 Oct 21 22:02 .
+drwxrws--- 1 root nogroup 44 Oct 21 22:01 ..
+drwxrws--- 1 root nogroup 10 Oct 21 22:02 .local
+[exit 0]
+
+# For real this time
+
+$ chezmoi apply --verbose
+diff --git a/.bashrc b/.bashrc
+new file mode 100660
+index 0000000000000000000000000000000000000000..77f7bf9a950667e85c58d658263bfd90b747c565
+--- /dev/null
++++ b/.bashrc
+@@ -0,0 +1,12 @@
++# Alex's .bashrc -- the shared starting point on every machine.
++
++# History: kept, and shared sensibly between shells.
++HISTSIZE=1000
++HISTFILESIZE=2000
++
++# Prompt: user@host and the working directory.
++PS1='\u@\h:\w\$ '
++
++# Aliases everyone gets.
++alias ll='ls -alF'
++alias gs='git status'
+diff --git a/.gitconfig b/.gitconfig
+new file mode 100660
+index 0000000000000000000000000000000000000000..9770bb4a066e00e1eb51199a90e4946ec2f9a7ff
+--- /dev/null
++++ b/.gitconfig
+@@ -0,0 +1,10 @@
++[user]
++	name = Alex Mercer
++	email = alex@example.com
++[core]
++	editor = vim
++[init]
++	defaultBranch = main
++[alias]
++	st = status
++	co = checkout
+diff --git a/.vimrc b/.vimrc
+new file mode 100660
+index 0000000000000000000000000000000000000000..4a81ef35179152b813f219fc9fcfb6419abb862d
+--- /dev/null
++++ b/.vimrc
+@@ -0,0 +1,6 @@
++" Alex's .vimrc -- small and portable.
++set number
++set expandtab
++set tabstop=4
++set shiftwidth=4
++syntax on
+[exit 0]
+
+$ ls -la
+total 12
+drwxrws--- 1 root nogroup  72 Oct 21 22:02 .
+drwxrws--- 1 root nogroup  44 Oct 21 22:01 ..
+-rw-rw---- 1 root nogroup 283 Oct 21 22:02 .bashrc
+drwxrws--- 1 root nogroup  14 Oct 21 22:02 .config
+-rw-rw---- 1 root nogroup 139 Oct 21 22:02 .gitconfig
+drwxrws--- 1 root nogroup  10 Oct 21 22:02 .local
+-rw-rw---- 1 root nogroup 105 Oct 21 22:02 .vimrc
+[exit 0]
+
+# What landed is what the laptop has, byte for byte
+
+$ diff /home/hatch/workspace/chezmoi-build/lab/home-server/.bashrc ../home-laptop/.bashrc
+[exit 0]
+
+$ diff /home/hatch/workspace/chezmoi-build/lab/home-server/.gitconfig ../home-laptop/.gitconfig
+[exit 0]
+
+$ diff /home/hatch/workspace/chezmoi-build/lab/home-server/.vimrc ../home-laptop/.vimrc
+[exit 0]
+
+$ chezmoi status
+[exit 0]

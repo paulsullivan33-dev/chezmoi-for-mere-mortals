@@ -1,0 +1,33 @@
+# chezmoi edit opens the SOURCE file in $EDITOR. In the lab
+# $EDITOR is examples/fake-editor.sh, which appends one line.
+# --apply applies the result straight afterwards.
+
+$ env EDITOR=/home/hatch/workspace/chezmoi-for-mere-mortals/examples/fake-editor.sh chezmoi edit --apply /home/hatch/workspace/chezmoi-build/lab/home-laptop/.vimrc
+chezmoi: warning: /home/hatch/workspace/chezmoi-for-mere-mortals/examples/fake-editor.sh /home/hatch/workspace/chezmoi-build/lab/home-laptop/.local/share/chezmoi/dot_vimrc: returned in less than 1s
+[exit 0]
+
+$ tail -3 /home/hatch/workspace/chezmoi-build/lab/home-laptop/.vimrc
+syntax on
+
+" appended by the editor during chezmoi edit
+[exit 0]
+
+$ tail -3 .local/share/chezmoi/dot_vimrc
+syntax on
+
+" appended by the editor during chezmoi edit
+[exit 0]
+
+$ chezmoi git -- add dot_vimrc
+[exit 0]
+
+$ chezmoi git -- commit -m Vim: note appended through chezmoi edit
+[main 9d34b5f] Vim: note appended through chezmoi edit
+ 1 file changed, 2 insertions(+)
+[exit 0]
+
+$ chezmoi git -- log --oneline
+9d34b5f Vim: note appended through chezmoi edit
+2f40606 Add gd alias (re-added from the laptop)
+285d9f8 Alex's dotfiles, first state
+[exit 0]

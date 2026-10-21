@@ -1,0 +1,66 @@
+Chezmoi commands -- the everyday set
+from "Chezmoi for Mere Mortals"
+====================================================================
+
+Every output quoted in the guide was captured from chezmoi
+2.73.3 against the two fake homes built by build-lab.sh
+(see lab-notes.txt).
+
+
+SETUP
+--------------------
+    chezmoi init                  first time on a machine:
+                                  source directory, defaults
+    chezmoi init REPO             same, cloning REPO (a URL,
+                                  or a local path in the lab)
+    chezmoi source-path           where the source state lives
+    chezmoi doctor                the whole setup, reported
+
+
+ADDING AND EDITING
+--------------------
+    chezmoi add ~/.bashrc         record a file's current state
+    chezmoi add --template F      record it as a template
+    chezmoi add --encrypt F       record it encrypted (needs
+                                  encryption configured first)
+    chezmoi edit ~/.bashrc        open the source file in
+                                  $EDITOR (--apply to apply too)
+    chezmoi re-add ~/.bashrc      pull a target-side edit back
+                                  into the source state
+    chezmoi git -- <args>         run git in the source
+                                  directory (commit often)
+
+
+THE REHEARSAL PAIR, THEN APPLY
+--------------------
+    chezmoi status                what differs, as two letters
+                                  per file; silence means in step
+    chezmoi diff                  the difference itself, as the
+                                  diff apply would act on
+    chezmoi apply --dry-run -v    rehearse everything, write
+                                  nothing, say what would happen
+    chezmoi apply                 make the target match the
+                                  source state
+    chezmoi apply --force F       apply one file without the
+                                  "changed since I wrote it"
+                                  prompt -- use it knowingly
+    chezmoi cat ~/.gitconfig      print what apply would write
+                                  for one file, touching nothing
+
+
+OTHER MACHINES
+--------------------
+    chezmoi update                pull the repository, then apply
+    chezmoi managed               the files under management
+                                  (the ignore list already applied)
+    chezmoi verify                exit 0 if and only if every
+                                  target matches the source state
+
+
+DATA AND TEMPLATES
+--------------------
+    chezmoi data                  everything a template can see
+                                  on this machine, as JSON
+    # in a template:  {{ .email }}          a data value
+    #                 {{ if eq .machine "laptop" }} ... {{ end }}
+    #                 {{ .chezmoi.hostname }}  a built-in fact

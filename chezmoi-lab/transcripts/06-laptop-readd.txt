@@ -1,0 +1,49 @@
+# Alex edits the applied file directly -- the way people
+# actually tweak a .bashrc -- and the two states drift apart
+
+$ sh -c echo "alias gd='git diff'" >> ~/.bashrc
+[exit 0]
+
+$ tail -3 /home/hatch/workspace/chezmoi-build/lab/home-laptop/.bashrc
+alias ll='ls -alF'
+alias gs='git status'
+alias gd='git diff'
+[exit 0]
+
+$ chezmoi status
+MM .bashrc
+[exit 0]
+
+$ chezmoi diff
+diff --git a/.bashrc b/.bashrc
+index 637bd59160a53c7a3645f2bf7f823842e1689302..77f7bf9a950667e85c58d658263bfd90b747c565 100660
+--- a/.bashrc
++++ b/.bashrc
+@@ -10,4 +10,3 @@
+ # Aliases everyone gets.
+ alias ll='ls -alF'
+ alias gs='git status'
+-alias gd='git diff'
+[exit 0]
+
+# re-add pulls the target's current contents back into the
+# source state. Drift gone; the change is now the record.
+
+$ chezmoi re-add /home/hatch/workspace/chezmoi-build/lab/home-laptop/.bashrc
+[exit 0]
+
+$ chezmoi status
+[exit 0]
+
+$ chezmoi git -- add dot_bashrc
+[exit 0]
+
+$ chezmoi git -- commit -m Add gd alias (re-added from the laptop)
+[main 2f40606] Add gd alias (re-added from the laptop)
+ 1 file changed, 1 insertion(+)
+[exit 0]
+
+$ chezmoi git -- log --oneline
+2f40606 Add gd alias (re-added from the laptop)
+285d9f8 Alex's dotfiles, first state
+[exit 0]

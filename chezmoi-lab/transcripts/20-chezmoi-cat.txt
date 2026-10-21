@@ -1,0 +1,16 @@
+# chezmoi cat: print exactly what apply would write for one
+# file -- the template rendered with THIS machine's data,
+# without touching the target
+
+$ chezmoi cat /home/hatch/workspace/chezmoi-build/lab/home-laptop/.gitconfig
+[user]
+	name = Alex Mercer
+	email = alex@example.com
+[core]
+	editor = vim
+[init]
+	defaultBranch = main
+[alias]
+	st = status
+	co = checkout
+[exit 0]

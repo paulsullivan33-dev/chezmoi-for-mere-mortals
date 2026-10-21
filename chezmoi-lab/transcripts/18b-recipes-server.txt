@@ -1,0 +1,53 @@
+# The new file arrives by update, like everything else
+
+$ chezmoi update
+From /home/hatch/workspace/chezmoi-build/lab/home-laptop/.local/share/chezmoi
+   ad89946..f003fd9  main       -> origin/main
+Updating ad89946..f003fd9
+Fast-forward
+ dot_tmux.conf | 2 ++
+ 1 file changed, 2 insertions(+)
+ create mode 100644 dot_tmux.conf
+[exit 0]
+
+$ cat /home/hatch/workspace/chezmoi-build/lab/home-server/.tmux.conf
+set -g mouse on
+set -g history-limit 10000
+[exit 0]
+
+# Recipe: a managed file is deleted (or mangled) on this
+# machine. apply restores exactly what the source state says
+
+$ rm /home/hatch/workspace/chezmoi-build/lab/home-server/.vimrc
+[exit 0]
+
+$ chezmoi status
+DA .vimrc
+[exit 0]
+
+$ chezmoi apply
+.vimrc has changed since chezmoi last wrote it?
+chezmoi: .vimrc: could not open a new TTY: open /dev/tty: no such device or address
+[exit 1]
+
+$ head -2 /home/hatch/workspace/chezmoi-build/lab/home-server/.vimrc
+head: cannot open '/home/hatch/workspace/chezmoi-build/lab/home-server/.vimrc' for reading: No such file or directory
+[exit 1]
+
+$ chezmoi verify
+[exit 1]
+# The prompt is chezmoi protecting work it cannot account
+# for. For a file you know is expendable, --force says so
+# explicitly, per invocation -- which is why scripts and
+# scheduled jobs use it, and fingers should pause first
+
+$ chezmoi apply --force /home/hatch/workspace/chezmoi-build/lab/home-server/.vimrc
+[exit 0]
+
+$ head -2 /home/hatch/workspace/chezmoi-build/lab/home-server/.vimrc
+" Alex's .vimrc -- small and portable.
+set number
+[exit 0]
+
+$ chezmoi verify
+[exit 0]

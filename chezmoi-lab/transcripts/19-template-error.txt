@@ -1,0 +1,20 @@
+# A broken template: an unclosed action, introduced on purpose
+
+$ sh -c printf '\n{{ .email\n' >> .local/share/chezmoi/dot_gitconfig.tmpl
+[exit 0]
+
+$ chezmoi apply
+chezmoi: .gitconfig: template: dot_gitconfig.tmpl:13: unclosed action started at dot_gitconfig.tmpl:12
+[exit 1]
+
+# Nothing was applied. The repair is in the source: the file
+# is under git, so the last committed state is one checkout away
+
+$ chezmoi git -- checkout -- dot_gitconfig.tmpl
+[exit 0]
+
+$ chezmoi apply
+[exit 0]
+
+$ chezmoi status
+[exit 0]

@@ -1,0 +1,34 @@
+# On the server, update = pull the source repo, then apply.
+# Three commits are waiting: everything made on the laptop since
+# the server cloned -- the gd alias, the vimrc note, and the
+# history size. All three land in this one update.
+
+$ chezmoi update
+From /home/hatch/workspace/chezmoi-build/lab/home-laptop/.local/share/chezmoi
+   285d9f8..b873dee  main       -> origin/main
+Updating 285d9f8..b873dee
+Fast-forward
+ dot_bashrc | 3 ++-
+ dot_vimrc  | 2 ++
+ 2 files changed, 4 insertions(+), 1 deletion(-)
+[exit 0]
+
+$ grep HISTSIZE /home/hatch/workspace/chezmoi-build/lab/home-server/.bashrc
+HISTSIZE=5000
+[exit 0]
+
+$ grep alias gd /home/hatch/workspace/chezmoi-build/lab/home-server/.bashrc
+alias gd='git diff'
+[exit 0]
+
+$ tail -2 /home/hatch/workspace/chezmoi-build/lab/home-server/.vimrc
+
+" appended by the editor during chezmoi edit
+[exit 0]
+
+$ chezmoi git -- log --oneline
+b873dee Bash history: 5000 lines
+9d34b5f Vim: note appended through chezmoi edit
+2f40606 Add gd alias (re-added from the laptop)
+285d9f8 Alex's dotfiles, first state
+[exit 0]

@@ -1,0 +1,9 @@
+# chezmoi version, on the build machine
+
+$ chezmoi --version
+chezmoi version v2.73.3, commit 63093ac0e26e803817ced0e2184cb57c4f273388, built at 2026-10-20T15:09:45Z, built by goreleaser
+[exit 0]
+
+$ age --version
+v1.3.2
+[exit 0]

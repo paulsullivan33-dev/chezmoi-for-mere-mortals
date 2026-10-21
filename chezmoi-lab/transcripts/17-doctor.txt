@@ -1,0 +1,50 @@
+# doctor: chezmoi's own report on this machine's setup --
+# the first thing to run (and to quote) when something is off
+
+$ chezmoi doctor
+RESULT    CHECK                       MESSAGE
+ok        version                     v2.73.3, commit 63093ac0e26e803817ced0e2184cb57c4f273388, built at 2026-10-20T15:09:45Z, built by goreleaser
+ok        latest-version              v2.73.3
+ok        os-arch                     linux/amd64 (Ubuntu 24.04.5 LTS (Noble Numbat))
+ok        build-info                  CGO_ENABLED=1, GOAMD64=v1
+ok        uname                       Linux htch-runtime 7.0.0-39-generic #1 SMP PREEMPT_DYNAMIC Thu Sep 24 08:42:15 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+ok        go-version                  go1.27.3 (gc)
+ok        executable                  /home/hatch/workspace/chezmoi-build/bin/chezmoi
+ok        upgrade-method              upgrade-package
+ok        config-file                 found ~/.config/chezmoi/chezmoi.toml, last modified 2026-10-21T22:09:51Z
+ok        source-dir                  ~/.local/share/chezmoi is a git working tree (clean)
+ok        suspicious-entries          no suspicious entries
+ok        working-tree                ~/.local/share/chezmoi is a git working tree (clean)
+ok        dest-dir                    ~ is a directory
+error     hardlink                    failed creating hardlink from ~/.local/share/chezmoi to /tmp: link ~/.local/share/chezmoi/.chezmoi-doctor-hardlink-test /tmp/chezmoi-doctor3123340191/.chezmoi-doctor-hardlink-test: invalid cross-device link
+ok        symlink                     created symlink from .new-name to .old-name
+warning   umask                       007
+ok        cd-command                  found /bin/bash
+ok        cd-args                     /bin/bash
+info      diff-command                not set
+ok        edit-command                found /usr/bin/vi
+ok        edit-args                   /usr/bin/vi
+ok        git-command                 found /usr/bin/git, version 2.43.0
+ok        merge-command               found /usr/bin/vimdiff
+ok        shell-command               found /bin/bash
+ok        shell-args                  /bin/bash
+ok        age-command                 found /home/hatch/workspace/chezmoi-build/bin/age, version 1.3.2
+ok        gpg-command                 found /usr/bin/gpg, version 2.4.4
+info      pinentry-command            not set
+info      1password-command           op not found in $PATH
+info      bitwarden-command           bw not found in $PATH
+info      bitwarden-secrets-command   bws not found in $PATH
+info      dashlane-command            dcli not found in $PATH
+info      doppler-command             doppler not found in $PATH
+info      gopass-command              gopass not found in $PATH
+info      keepassxc-command           keepassxc-cli not found in $PATH
+info      keepassxc-db                not set
+info      keeper-command              keeper not found in $PATH
+info      lastpass-command            lpass not found in $PATH
+info      pass-command                pass not found in $PATH
+info      passhole-command            ph not found in $PATH
+info      protonpass-command          pass-cli not found in $PATH
+info      rbw-command                 rbw not found in $PATH
+info      vault-command               vault not found in $PATH
+info      secret-command              not set
+[exit 1]

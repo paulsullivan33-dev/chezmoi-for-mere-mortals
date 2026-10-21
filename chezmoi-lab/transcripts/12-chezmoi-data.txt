@@ -1,0 +1,313 @@
+# chezmoi data prints everything a template on this machine
+# can see: Alex's [data] values merged with chezmoi's own
+# .chezmoi.* facts about the machine it is running on
+
+$ chezmoi data
+{
+  "chezmoi": {
+    "arch": "amd64",
+    "args": [
+      "chezmoi",
+      "data"
+    ],
+    "cacheDir": "/home/hatch/workspace/chezmoi-build/lab/home-server/.cache/chezmoi",
+    "command": "data",
+    "commandDir": "/home/hatch/workspace/chezmoi-build/lab/home-server",
+    "config": {
+      "add": {
+        "encrypt": false,
+        "secrets": "warning",
+        "templateSymlinks": false
+      },
+      "age": {
+        "args": null,
+        "command": "age",
+        "identities": null,
+        "identity": "",
+        "passphrase": false,
+        "recipient": "",
+        "recipients": null,
+        "recipientsFile": "",
+        "recipientsFiles": null,
+        "suffix": ".age",
+        "symmetric": false,
+        "useBuiltin": false
+      },
+      "awsSecretsManager": {
+        "profile": "",
+        "region": ""
+      },
+      "azureKeyVault": {
+        "defaultVault": ""
+      },
+      "bitwarden": {
+        "command": "bw",
+        "unlock": false
+      },
+      "bitwardenSecrets": {
+        "command": "bws"
+      },
+      "cacheDir": "/home/hatch/workspace/chezmoi-build/lab/home-server/.cache/chezmoi",
+      "cd": {
+        "args": null,
+        "command": ""
+      },
+      "color": "auto",
+      "completion": {
+        "custom": false
+      },
+      "dashlane": {
+        "args": null,
+        "command": "dcli"
+      },
+      "data": {
+        "editor": "nano",
+        "email": "alex@homelab.example",
+        "machine": "server"
+      },
+      "destDir": "/home/hatch/workspace/chezmoi-build/lab/home-server",
+      "diff": {
+        "args": null,
+        "command": "",
+        "exclude": [],
+        "pager": "",
+        "pagerArgs": null,
+        "reverse": false,
+        "scriptContents": true
+      },
+      "docker": {
+        "command": "docker"
+      },
+      "doppler": {
+        "args": null,
+        "command": "doppler",
+        "config": "",
+        "project": ""
+      },
+      "edit": {
+        "apply": false,
+        "args": null,
+        "command": "",
+        "hardlink": true,
+        "minDuration": 1000000000,
+        "watch": false
+      },
+      "ejson": {
+        "key": "",
+        "keyDir": "/opt/ejson/keys"
+      },
+      "encryption": "",
+      "env": null,
+      "format": "json",
+      "git": {
+        "autoadd": false,
+        "autocommit": false,
+        "autopush": false,
+        "command": "git",
+        "commitMessageTemplate": "",
+        "commitMessageTemplateFile": "",
+        "lfs": false
+      },
+      "gitHub": {
+        "refreshPeriod": 60000000000
+      },
+      "gopass": {
+        "command": "gopass",
+        "mode": ""
+      },
+      "gpg": {
+        "args": null,
+        "command": "gpg",
+        "recipient": "",
+        "recipients": null,
+        "suffix": ".asc",
+        "symmetric": false
+      },
+      "hooks": null,
+      "interactive": false,
+      "interpreters": {
+        "bat": {
+          "args": null,
+          "command": ""
+        },
+        "cmd": {
+          "args": null,
+          "command": ""
+        },
+        "com": {
+          "args": null,
+          "command": ""
+        },
+        "exe": {
+          "args": null,
+          "command": ""
+        },
+        "nu": {
+          "args": null,
+          "command": "nu"
+        },
+        "pl": {
+          "args": null,
+          "command": "perl"
+        },
+        "ps1": {
+          "args": null,
+          "command": ""
+        },
+        "py": {
+          "args": null,
+          "command": "python3"
+        },
+        "rb": {
+          "args": null,
+          "command": "ruby"
+        }
+      },
+      "keepassxc": {
+        "args": null,
+        "command": "keepassxc-cli",
+        "database": "",
+        "mode": "cache-password",
+        "prompt": true
+      },
+      "keeper": {
+        "args": null,
+        "command": "keeper"
+      },
+      "lastpass": {
+        "command": "lpass"
+      },
+      "lessInteractive": false,
+      "merge": {
+        "args": null,
+        "command": "vimdiff"
+      },
+      "mode": "file",
+      "onepassword": {
+        "command": "op",
+        "mode": "account",
+        "prompt": true
+      },
+      "pager": "",
+      "pagerArgs": null,
+      "pass": {
+        "command": "pass"
+      },
+      "passhole": {
+        "args": null,
+        "command": "ph",
+        "prompt": true
+      },
+      "persistentState": "",
+      "pinentry": {
+        "args": null,
+        "command": "",
+        "options": [
+          "allow-external-password-cache"
+        ]
+      },
+      "progress": "auto",
+      "protonPass": {
+        "command": "pass-cli"
+      },
+      "rbw": {
+        "command": "rbw"
+      },
+      "safe": true,
+      "scriptEnv": null,
+      "scriptTempDir": "",
+      "secret": {
+        "args": null,
+        "command": ""
+      },
+      "sourceDir": "/home/hatch/workspace/chezmoi-build/lab/home-server/.local/share/chezmoi",
+      "status": {
+        "exclude": [],
+        "pathStyle": "relative"
+      },
+      "tempDir": "/tmp",
+      "template": {
+        "options": [
+          "missingkey=error"
+        ]
+      },
+      "textConv": null,
+      "umask": 7,
+      "update": {
+        "apply": true,
+        "args": null,
+        "command": "",
+        "recurseSubmodules": true
+      },
+      "useBuiltinAge": "auto",
+      "useBuiltinGit": "auto",
+      "vault": {
+        "command": "vault"
+      },
+      "verbose": false,
+      "verify": {
+        "exclude": []
+      },
+      "warnings": {
+        "configFileTemplateHasChanged": true
+      },
+      "workingTree": "/home/hatch/workspace/chezmoi-build/lab/home-server/.local/share/chezmoi"
+    },
+    "configFile": "/home/hatch/workspace/chezmoi-build/lab/home-server/.config/chezmoi/chezmoi.toml",
+    "destDir": "/home/hatch/workspace/chezmoi-build/lab/home-server",
+    "executable": "/home/hatch/workspace/chezmoi-build/bin/chezmoi",
+    "flags": {
+      "dryRun": false,
+      "force": false,
+      "keepGoing": false,
+      "noPager": false,
+      "noTTY": false
+    },
+    "fqdnHostname": "htch-runtime",
+    "gid": "0",
+    "group": "root",
+    "homeDir": "/home/hatch/workspace/chezmoi-build/lab/home-server",
+    "hostname": "htch-runtime",
+    "kernel": {
+      "osrelease": "7.0.0-39-generic",
+      "ostype": "Linux",
+      "version": "#1 SMP PREEMPT_DYNAMIC Thu Sep 24 08:42:15 UTC 2026"
+    },
+    "os": "linux",
+    "osRelease": {
+      "bugReportURL": "https://bugs.launchpad.net/ubuntu/",
+      "homeURL": "https://www.ubuntu.com/",
+      "id": "ubuntu",
+      "idLike": "debian",
+      "imageID": "hatch-image",
+      "imageVersion": "0.1.46",
+      "logo": "ubuntu-logo",
+      "name": "Ubuntu",
+      "prettyName": "Ubuntu 24.04.5 LTS",
+      "privacyPolicyURL": "https://www.ubuntu.com/legal/terms-and-policies/privacy-policy",
+      "supportURL": "https://help.ubuntu.com/",
+      "ubuntuCodename": "noble",
+      "version": "24.04.5 LTS (Noble Numbat)",
+      "versionCodename": "noble",
+      "versionID": "24.04"
+    },
+    "pathListSeparator": ":",
+    "pathSeparator": "/",
+    "rawHomeDir": "/home/hatch/workspace/chezmoi-build/lab/home-server",
+    "sourceDir": "/home/hatch/workspace/chezmoi-build/lab/home-server/.local/share/chezmoi",
+    "uid": "0",
+    "username": "root",
+    "version": {
+      "builtBy": "goreleaser",
+      "commit": "63093ac0e26e803817ced0e2184cb57c4f273388",
+      "date": "2026-10-20T15:09:45Z",
+      "version": "2.73.3"
+    },
+    "windowsVersion": {},
+    "workingTree": "/home/hatch/workspace/chezmoi-build/lab/home-server/.local/share/chezmoi"
+  },
+  "editor": "nano",
+  "email": "alex@homelab.example",
+  "machine": "server"
+}
+[exit 0]

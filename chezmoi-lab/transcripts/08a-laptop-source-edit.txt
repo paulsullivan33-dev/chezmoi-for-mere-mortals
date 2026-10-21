@@ -1,0 +1,24 @@
+# The third direction: edit the source file itself (any tool
+# you like -- here, sed), then apply the change to the laptop
+
+$ sed -i s/^HISTSIZE=1000/HISTSIZE=5000/ .local/share/chezmoi/dot_bashrc
+[exit 0]
+
+$ chezmoi status
+ M .bashrc
+[exit 0]
+
+$ chezmoi apply
+[exit 0]
+
+$ grep HISTSIZE /home/hatch/workspace/chezmoi-build/lab/home-laptop/.bashrc
+HISTSIZE=5000
+[exit 0]
+
+$ chezmoi git -- add dot_bashrc
+[exit 0]
+
+$ chezmoi git -- commit -m Bash history: 5000 lines
+[main b873dee] Bash history: 5000 lines
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+[exit 0]

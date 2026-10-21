@@ -1,0 +1,21 @@
+# Recipe: a new file joins the set (the whole loop, quickly)
+
+$ sh -c printf 'set -g mouse on\nset -g history-limit 10000\n' > ~/.tmux.conf
+[exit 0]
+
+$ chezmoi add /home/hatch/workspace/chezmoi-build/lab/home-laptop/.tmux.conf
+[exit 0]
+
+$ chezmoi git -- add dot_tmux.conf
+[exit 0]
+
+$ chezmoi git -- commit -m Add .tmux.conf
+[main f003fd9] Add .tmux.conf
+ 1 file changed, 2 insertions(+)
+ create mode 100644 dot_tmux.conf
+[exit 0]
+
+# Recipe: check the whole setup is in step, in one command
+
+$ chezmoi verify
+[exit 0]

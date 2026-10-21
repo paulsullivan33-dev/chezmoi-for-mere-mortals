@@ -1,0 +1,20 @@
+# Alex's config on the laptop: ~/.config/chezmoi/chezmoi.toml
+# This file is NOT in the dotfiles repository. It is written on
+# each machine, by hand, and it is how one shared set of templates
+# renders differently per machine: templates read these values.
+# The [age] section arrives later, in the secrets chapter; the
+# encryption line at the top tells chezmoi which encryption the
+# [age] section belongs to.
+
+encryption = "age"
+
+[data]
+    machine = "laptop"
+    email = "alex@example.com"
+    editor = "vim"
+
+[age]
+    identity = "/path/to/alex-age-key.txt"
+    # The recipient is the public half of the key: safe to share,
+    # and it is the only half this line needs.
+    recipient = "age1-alexs-public-key-goes-here"

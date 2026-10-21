@@ -1,0 +1,50 @@
+# todo.txt in the source directory: a file whose target name
+# has no leading dot keeps its name unchanged (only dotfiles
+# get the dot_ treatment). The .chezmoiignore beside it names
+# it, so although the file is about to be committed to the
+# repository like everything else, chezmoi will never apply
+# it, on any machine.
+
+$ ls .local/share/chezmoi
+dot_bashrc.tmpl
+dot_gitconfig.tmpl
+dot_vimrc
+todo.txt
+[exit 0]
+
+$ cat .local/share/chezmoi/.chezmoiignore
+todo.txt
+[exit 0]
+
+$ chezmoi git -- add todo.txt
+[exit 0]
+
+$ chezmoi git -- commit -m Keep todo.txt in the repo (ignored: never applied)
+[main b272741] Keep todo.txt in the repo (ignored: never applied)
+ 1 file changed, 2 insertions(+)
+ create mode 100644 todo.txt
+[exit 0]
+
+$ chezmoi managed
+.bashrc
+.gitconfig
+.vimrc
+[exit 0]
+
+# Ignoring is total: even add refuses the file now
+
+$ chezmoi add /home/hatch/workspace/chezmoi-build/lab/home-laptop/todo.txt
+chezmoi: warning: ignoring todo.txt
+[exit 0]
+
+$ chezmoi git -- log --oneline
+b272741 Keep todo.txt in the repo (ignored: never applied)
+16de004 Ignore todo.txt: kept in the repo, no longer managed
+bed6e9e Bashrc template: laptop-only alias behind a conditional
+a1540fd Gitconfig template reads email and editor from data
+55df297 Gitconfig becomes a template (email, editor)
+b873dee Bash history: 5000 lines
+9d34b5f Vim: note appended through chezmoi edit
+2f40606 Add gd alias (re-added from the laptop)
+285d9f8 Alex's dotfiles, first state
+[exit 0]

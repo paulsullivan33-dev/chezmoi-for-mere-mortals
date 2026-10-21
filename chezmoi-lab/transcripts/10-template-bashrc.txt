@@ -1,0 +1,55 @@
+# .bashrc becomes a template too, with a conditional block:
+# one alias exists only where the data says machine=laptop
+# (edited template kept as examples/dot_bashrc.tmpl)
+
+$ cat .local/share/chezmoi/dot_bashrc.tmpl
+# Alex's .bashrc -- the shared starting point on every machine.
+
+# History: kept, and shared sensibly between shells.
+HISTSIZE=5000
+HISTFILESIZE=2000
+
+# Prompt: user@host and the working directory.
+PS1='\u@\h:\w\$ '
+
+# Aliases everyone gets.
+alias ll='ls -alF'
+alias gs='git status'
+alias gd='git diff'
+{{ if eq .machine "laptop" -}}
+
+# Laptop only: the projects directory shortcut.
+alias proj='cd ~/projects'
+{{ end -}}
+[exit 0]
+
+# On the laptop the block renders in
+
+$ chezmoi apply
+[exit 0]
+
+$ tail -4 /home/hatch/workspace/chezmoi-build/lab/home-laptop/.bashrc
+alias gs='git status'
+alias gd='git diff'
+# Laptop only: the projects directory shortcut.
+alias proj='cd ~/projects'
+[exit 0]
+
+$ chezmoi git -- add dot_bashrc.tmpl dot_bashrc
+[exit 0]
+
+$ chezmoi git -- commit -m Bashrc template: laptop-only alias behind a conditional
+[main bed6e9e] Bashrc template: laptop-only alias behind a conditional
+ 1 file changed, 5 insertions(+)
+ rename dot_bashrc => dot_bashrc.tmpl (71%)
+[exit 0]
+
+$ chezmoi git -- log --oneline
+bed6e9e Bashrc template: laptop-only alias behind a conditional
+a1540fd Gitconfig template reads email and editor from data
+55df297 Gitconfig becomes a template (email, editor)
+b873dee Bash history: 5000 lines
+9d34b5f Vim: note appended through chezmoi edit
+2f40606 Add gd alias (re-added from the laptop)
+285d9f8 Alex's dotfiles, first state
+[exit 0]

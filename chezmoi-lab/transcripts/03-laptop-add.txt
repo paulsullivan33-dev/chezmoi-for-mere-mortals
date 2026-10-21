@@ -1,0 +1,50 @@
+# Add the three real dotfiles. add copies; the originals stay put.
+
+$ chezmoi add /home/hatch/workspace/chezmoi-build/lab/home-laptop/.bashrc /home/hatch/workspace/chezmoi-build/lab/home-laptop/.gitconfig /home/hatch/workspace/chezmoi-build/lab/home-laptop/.vimrc
+[exit 0]
+
+# The source state: target names rewritten -- a leading dot
+# becomes the prefix dot_ so the files are visible in the repo
+
+$ ls -la .local/share/chezmoi
+total 12
+drwxrws--- 1 root nogroup  72 Oct 21 22:01 .
+drwxrws--- 1 root nogroup  14 Oct 21 22:01 ..
+drwxrws--- 1 root nogroup  98 Oct 21 22:01 .git
+-rw-rw---- 1 root nogroup 283 Oct 21 22:01 dot_bashrc
+-rw-rw---- 1 root nogroup 139 Oct 21 22:01 dot_gitconfig
+-rw-rw---- 1 root nogroup 105 Oct 21 22:01 dot_vimrc
+[exit 0]
+
+# The stored .bashrc is the file itself, byte for byte (for now)
+
+$ cat .local/share/chezmoi/dot_bashrc
+# Alex's .bashrc -- the shared starting point on every machine.
+
+# History: kept, and shared sensibly between shells.
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# Prompt: user@host and the working directory.
+PS1='\u@\h:\w\$ '
+
+# Aliases everyone gets.
+alias ll='ls -alF'
+alias gs='git status'
+[exit 0]
+
+# todo.txt was not added: it sits in the home, unmanaged
+
+$ chezmoi managed
+.bashrc
+.gitconfig
+.vimrc
+[exit 0]
+
+# Nothing has drifted, so status and diff are both silent
+
+$ chezmoi status
+[exit 0]
+
+$ chezmoi diff
+[exit 0]
